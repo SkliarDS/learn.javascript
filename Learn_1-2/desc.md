@@ -124,9 +124,20 @@ Boolean([]) // true
 Boolean([1, 2]) // true
 
 
-// Грубо говоря, всё, кроме пустой строки, нуля,
-// NaN, null и undefined — true.
-
+<p>Грубо говоря, всё, кроме пустой строки, нуля,</p> 
+<p>NaN, null и undefined — true.</p>
+<b>Ложноподобное (falsy) значение — значение, которое становится false в булевом контексте.</b>
+<ul>
+    <li>if (false)</li>
+    <li>if (null)</li>
+    <li>if (undefined)</li>
+    <li>if (0)</li>
+    <li>if (0)</li>
+    <li>if (-0)</li>
+    <li>if (0n)</li>
+    <li>if (NaN)</li>
+    <li>if ("")</li>
+</ul>
 
 2.8 Базовые операторы, математика ========================================
 

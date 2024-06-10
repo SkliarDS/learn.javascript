@@ -48,3 +48,29 @@ console.log('c:',c); // 2
 console.log('a:',a); // 2
 console.log('b:',b); // 2
 console.log('d:',d); // 1
+
+console.log('null:',null >= 0);
+const NAME_JS = 'ECMAScript';
+// let name_from_promt = prompt('Какое назание JS ?');
+
+// if(NAME_JS == name_from_promt){
+//     console.log(':',"Верно");
+// } else {
+//     console.log(':',"Не знаете");
+// }
+
+// let value_promt = prompt('Введите число');
+// if(value_promt > 0) {
+//     console.log(':',1);
+// } else if(value_promt < 0){
+//     console.log(':',-1);
+// } else if (value_promt == 0){
+//     console.log(':',0);
+// }
+
+let login = '';
+let message = (login == 'Сотрудник') ? 'Привет' :
+(login == 'Директор') ? 'Здравтствуйте':
+(login == '') ? 'Нет логина' :
+'';
+console.log('message:',message);
