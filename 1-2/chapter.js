@@ -189,15 +189,21 @@ function setDefault(obj, key, defaultValue) {
 let obj = { a: null };
 // console.log(setDefault(obj, 'a', 100));
 
-let sum = 0;
+// let sum = 0;
 
-while (true) {
+// while (true) {
 
-  let value = +prompt("Введите число", '');
+//   let value = +prompt("Введите число", '');
 
-  if (!value) break; // (*)
+//   if (!value) break; // (*)
 
-  sum += value;
+//   sum += value;
 
-}
-alert( 'Сумма: ' + sum );
+// }
+// alert( 'Сумма: ' + sum );
+
+let counter = 1;
+let a5 = counter++; // (*) меняем ++counter на counter++
+console.log(a5); // 1
+a5 = counter++;
+console.log(a5);
