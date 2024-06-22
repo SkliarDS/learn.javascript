@@ -38,12 +38,4 @@
 </code>
 
 
-<code></code>
-<ul>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
-<h2></h2>
-<b></b>
-<p></p>
+

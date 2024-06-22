@@ -221,11 +221,14 @@ if (age < 18) {
 // ...не работает
 welcome();
 
-let ask = (question, yes, no) => {
-    confirm(question) ? yes() : no();
-}
-ask(
-    'Вы согласны?',
-    ()=>alert("Вы согласились."),
-    ()=>alert("Вы отменили выполнение."),
-)
+// let ask = (question, yes, no) => {
+//     confirm(question) ? yes() : no();
+// }
+// ask(
+//     'Вы согласны?',
+//     ()=>alert("Вы согласились."),
+//     ()=>alert("Вы отменили выполнение."),
+// )
+
+
+
