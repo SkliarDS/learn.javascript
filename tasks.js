@@ -1,3 +1,5 @@
+'use strict'
+
 //  1 часть
 // Задачи:
 //================================================================================================
@@ -239,8 +241,5 @@ console.log("romantic:", romantic)
 console.log("fantasy:", fantasy)
 console.log('Сотсортировать книги по названию:',sortBooksTitle(romantic));
 console.log('Сотсортировать книги по названию:',sortBooksTitle(fantasy));
-
-
-
 
 
