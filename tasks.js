@@ -242,4 +242,20 @@ console.log("fantasy:", fantasy)
 console.log('Сотсортировать книги по названию:',sortBooksTitle(romantic));
 console.log('Сотсортировать книги по названию:',sortBooksTitle(fantasy));
 
+// 4. ===================================================
+const isUniqueAuthor = (arr) => {
+  let authorArr = [];
+  let authorCount = {};
+  arr.map(book => authorArr.push(book.author));
+
+  authorArr.forEach(author => {
+    authorCount[author] = (authorCount[author] || 0) + 1;
+  });
+
+  return authorArr.filter(author => authorCount[author] === 1);
+};  
+console.log('4. Получить массив уникальных авторов:',isUniqueAuthor(books));
+
+
+
 
