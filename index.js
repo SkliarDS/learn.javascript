@@ -24,3 +24,46 @@ for (let i = 0; i <= str.length; i++) {
 }
 console.log('countSubstrSymbInStr:',countSubstrSymbInStr);
 console.log('counSymbInStr', counSymbInStr); // 1 2
+
+// String() Number() Boolean()
+
+// console.log('123:',String(123));
+// console.log('-12.3:',String(-12.3));
+// console.log('null:',String(null) );
+// console.log('undefined:',String(undefined) );
+// console.log('true:',String(true));
+// console.log('false:',String(false));
+// console.log('function () {}:',String(function () {}) );
+// console.log('{}:',String({}));
+// console.log('{ key: 42 }:',String({ key: 42 }) );
+// console.log('[]:',String([]) );
+// console.log('[1, 2]:',String([1, 2]));
+
+
+// console.log(' "123":', Number('123'));
+// console.log(' "123.4":', Number('123.4'));
+// console.log(' "123,4":', Number('123,4') );
+// console.log(' "":', Number(''));
+// console.log(' null:', Number(null));
+// console.log(' undefined:', Number(undefined));
+// console.log('true :', Number(true));
+// console.log(' false:', Number(false) );
+// console.log(' function () {}:', Number(function () {}));
+// console.log(' {}:', Number({}));
+// console.log(' []:', Number([]));
+// console.log(' [1]:', Number([1]));
+// console.log(' [1, 2]:', Number([1, 2]));
+
+// console.log(' "string":', Boolean('string'));
+// console.log(' false:', Boolean('false'));
+// console.log('"" :', Boolean(''));
+// console.log(' 0:', Boolean(0) );
+// console.log(' 42:', Boolean(42));
+// console.log(' NaN:', Boolean(NaN));
+// console.log(' null:', Boolean(null) );
+// console.log(' undefined:', Boolean(undefined));
+// console.log(' function () {}:', Boolean(function () {}));
+// console.log(' {}:', Boolean({}) );
+// console.log(' { key: 42 }:', Boolean({ key: 42 }));
+// console.log(' []:', Boolean([]));
+// console.log(' [1, 2]:', Boolean([1, 2]) );

@@ -207,3 +207,4 @@ let a5 = counter++; // (*) меняем ++counter на counter++
 console.log(a5); // 1
 a5 = counter++;
 console.log(a5);
+
