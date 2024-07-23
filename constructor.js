@@ -21,40 +21,46 @@ function Order(product){
     this.productTotalPrice = 0;
     this.productItems = {};
     this.productCount = 0;
-
+    this.isLocked = true;
     this.addItem = function(item, count, price){
-        let newItems = {
-            name: item,
-            count: count,
-            price: price,
-            totalPrice: count * price,
-        };
+        if(this.isLocked){
 
-        this.productItems[item] = newItems;
-        this.productCount = Object.keys(this.productItems).length;
-
-        for(let key in  this.productItems[item]) {
-            if (key == 'totalPrice') {
-                this.productTotalPrice = this.productTotalPrice + newItems[key];                
+            let newItems = {
+                name: item,
+                count: count,
+                price: price,
+                totalPrice: count * price,
             };
-        };        
+    
+            this.productItems[item] = newItems;
+            this.productCount = Object.keys(this.productItems).length;
+    
+            for(let key in  this.productItems[item]) {
+                if (key == 'totalPrice') {
+                    this.productTotalPrice = this.productTotalPrice + newItems[key];                
+                };
+            };        
+        }
     };
 
-    this.removeItem = function(item, count){         
-        for(let key in this.productItems){     
+    this.removeItem = function(item, count){  
+        if(this.isLocked){
 
-            if(key == item){   
-                count = (!count || this.productItems[key].count == count) ? 0 : count;        
-                this.productItems[key].count = this.productItems[key].count - count;
-                this.productItems[key].totalPrice = this.productItems[key].count * this.productItems[key].price;
-                this.productTotalPrice = this.productTotalPrice - this.productItems[key].totalPrice;
-
-                if(count == 0 || !count || this.productItems[key].count == 0) {              
-                    delete this.productItems[key];
-                    this.productCount = this.productCount - 1;
+            for(let key in this.productItems){     
+    
+                if(key == item){   
+                    count = (!count || this.productItems[key].count == count) ? 0 : count;        
+                    this.productItems[key].count = this.productItems[key].count - count;
+                    this.productItems[key].totalPrice = this.productItems[key].count * this.productItems[key].price;
+                    this.productTotalPrice = this.productTotalPrice - this.productItems[key].totalPrice;
+    
+                    if(count == 0 || !count || this.productItems[key].count == 0) {              
+                        delete this.productItems[key];
+                        this.productCount = this.productCount - 1;
+                    };
                 };
             };
-        };
+        }       
     };
 
     this.getCheck = function(){
@@ -64,8 +70,11 @@ function Order(product){
         };
     };
     this.lockOrder = function(){
-        this.addItem;
+        this.isLocked = false;
     };
+    this.unlockOrder = function(){
+        this.isLocked = true;
+    }
 };
 
 let product = new Order('Заказ № 1');
@@ -74,7 +83,8 @@ product.addItem('Колбаса', 1, 100);
 product.addItem('Хлеб', 2, 50); 
 product.lockOrder();
 product.addItem('Лимонад', 2, 50); 
-// 500
+product.unlockOrder();
+product.addItem('Cok', 2, 50); 
 product.removeItem('Молоко', 2);
 product.removeItem('Хлеб', 1);
 // 150

@@ -178,7 +178,7 @@ fruits.age = '25'
 fruits.age = ''
 fruits.pop();
 delete fruits.age;
-console.log('fffff:', fruits);
+console.log('fruits:', fruits);
 for(let key of fruits){
     console.log('key:', key);
 }
