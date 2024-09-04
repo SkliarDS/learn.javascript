@@ -1,36 +1,27 @@
-let arr = ['i', 'go', 'home', 'we'];
-let numbers = [1, 4, 2, 10, 9];
-let newArr =  arr.slice(0, 1);
+let f = new Map();
+f.set('num', '22');
+f.set('string', 'str');
+let john = {'name' : "John", age: 44};
+f.set(john, john.age);
 
-console.log("newArr:", newArr)
+let visitCountObj = {};
 
-let arrayLike = {
-    0: "что-то",
-    1: "ещё",
-    2: "ещё",
-    [Symbol.isConcatSpreadable]: true,
-    length: 3,
-};
-arr.concat(arrayLike);
-console.log('arr:',arr.sort((a, b) => a > b ? 1 : -1));
-console.log('numbers:',numbers.sort((a, b) => a - b));
+visitCountObj[john] = 123;
+console.log('visitCountObj:',visitCountObj);
 
-let users = [
-    {id: 1, name: "Вася"},
-    {id: 2, name: "Петя"},
-    {id: 3, name: "Маша"},
-    {id: 4, name: "Петя"},
-];
+console.log('f:',f);
 
-let user = users.map((item, index, arr )=> {
-    return item;
-});
+for(let key of f.entries()){
+  
+    console.log('key:',key);
+}
 
-console.log('user:',user);
+let s = new Set(f);
 
-let names = 'Вася,Петя,Маша';
-let str = "тест";
-let arrNames = names.split(',');
-console.log('str:',arrNames.join('/'));
-console.log("arrNames:", arrNames)
+let marry = {name: 'Marry', age: 88}
+s.add(marry).add(john).add(marry);
 
+console.log('s:',s);
+for(let key of s){
+    console.log('key1:',key);
+}

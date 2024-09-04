@@ -256,8 +256,14 @@ console.log(intersection(data, data2)); // { b: 2 }
 // Создайте функцию, которая принимает массив объектов с полями name и age и
 // возвращает массив имен людей, возраст которых больше 25 лет.
 function getNamesOfPeopleOlderThan25(people) {
-  //code here ...
-
+  	let maxAge = 25;
+	let arNames = [];
+	for(let key of people){
+		if(key.age > maxAge){
+			arNames.push(key.name);
+		}
+	}
+	return arNames;
 }
 
 let people = [
@@ -267,7 +273,7 @@ let people = [
   {name: "Anna", age: 24},
   {name: "Pit", age: 18}
 ];
-console.log(getNamesOfPeopleOlderThan25(people));
+console.log('getNamesOfPeopleOlderThan25',getNamesOfPeopleOlderThan25(people));
 // =======================================================================
 //5
 // ==========================================================================
@@ -296,8 +302,13 @@ console.log(getNamesOfPeopleOlderThan25(people));
 //       "Dasher Tonoyan",
 //     ]
 function sortReindeer(reindeerNames) {
-  //code here ...
-
+	return reindeerNames.sort((a, b) => {
+		let lastNameA  = a.split(' ')[1];
+		let lastNameB = b.split(' ')[1];
+		if(lastNameA > lastNameB) return 1;
+		if(lastNameA < lastNameB) return -1;
+		return 0;
+	})
 }
 
 const deers = [
@@ -311,7 +322,7 @@ const deers = [
   "Blitzen Claus"
 ]
 
-console.log(sortReindeer(deers))
+console.log('sortReindeer', sortReindeer(deers))
 // =======================================================================
 //6
 // ==========================================================================
