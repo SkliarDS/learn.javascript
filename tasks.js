@@ -256,6 +256,97 @@ const isUniqueAuthor = (arr) => {
 };  
 console.log('4. Получить массив уникальных авторов:',isUniqueAuthor(books));
 
+let array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let k = 3;
+
+function rearrangeArray(arr, k) {
+    for(let key of arr.splice(-k, k).reverse()){
+        arr.unshift(key);
+    }
+    return arr;
+}
+
+console.log('uniqueSort(arr):',rearrangeArray(array, k));
+
+function sumEvenOdd(arr) {
+    let obj = {};
+    let obj2 = {};
+    let sum = 0;
+    for(let key of arr){
+        if(key % 2 == 0 ){
+            sum += key;
+        } else {
+            sum += key;
+        }
+    }
+    obj['sum'] = sum ;
+    obj2['sum'] = sum ;
+}
+
+console.log('sumEvenOdd(arr):',sumEvenOdd(array));
+
+var originalArray = ['click1','click2',null,'','','submitForm', undefined, 0];
+function squeakyClean(arr) {
+    let newArr = [];
+    for(let key of arr){
+        if(key !== 0 && key !== null && key !== '' && key !== undefined){
+            newArr.push(key);
+        }
+    }
+    return newArr;
+}
+console.log('squeakyClean(arr):',squeakyClean(originalArray));
+
+let array2 = ['5', '0', 9, 3, 2, 1, '9', 6, 7];
+function divCon(x){
+    let sum = 0;
+    let sum2 = 0;
+    for(let key of x){
+        if(typeof key == 'number'){
+            sum += key;
+        } else {
+            sum2 += +key;
+        }
+    }
+    return sum - sum2;
+}
+console.log('divCon(x):',divCon(array2));
 
 
+// 6) https://www.codewars.com/kata/58ad09d6154165a1c80000d1/train/javascript
 
+// У вас есть строка, состоящая из нулей и единиц. Теперь выберите любые две соседние позиции в строке: если одна из них — 0, а другая — 1, удалите эти две цифры из строки.
+// Вернуть длину результирующей (наименьшей) строки, которую можно получить после многократного применения этой операции?
+
+// Примечание: после каждой операции оставшиеся цифры разделяются пробелами и, таким образом, больше не являются соседними — см. примеры ниже.
+
+// Примеры
+// Для "01010"результат должно быть 1:
+
+// "01010"  -->  "  010"  -->  "    0"
+
+// Для "110100"результат должно быть 2:
+// "110100"  -->  "1  100"  -->  "1    0"
+
+function zeroAndOne(s) {
+  let newArr = [];
+  for(let i = 0; i < s.split('').length; i++){
+      newArr.push(s.split('').splice(i, 2));
+  }  
+  return newArr;
+}
+
+console.log('zeroAndOne(s):',zeroAndOne('110100'));
+
+
+// 7) https://www.codewars.com/kata/515de9ae9dcfc28eb6000001/train/javascript
+
+// Завершите решение так, чтобы оно разделило строку на пары из двух символов. Если строка содержит нечетное количество символов, то следует заменить отсутствующий второй символ последней пары подчеркиванием ('_').
+
+// 'abc' =>  ['ab', 'c_']
+// 'abcdef' => ['ab', 'cd', 'ef']
+
+
+function solution(str){
+   
+}
