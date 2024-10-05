@@ -67,3 +67,13 @@ console.log('counSymbInStr', counSymbInStr); // 1 2
 // console.log(' { key: 42 }:', Boolean({ key: 42 }));
 // console.log(' []:', Boolean([]));
 // console.log(' [1, 2]:', Boolean([1, 2]) );
+
+obj[Symbol.iterator] = () => {
+    
+};
+
+const obj = { prop1: 123, prop2: 'str', prop3: true };
+const [val1, val2, , val3] = obj;
+for (val of obj) {
+    console.log(val);
+}

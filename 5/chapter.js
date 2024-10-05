@@ -120,8 +120,32 @@ console.log('json:',
         return (key != "" && value == meetup) ? undefined : value;
     })
 );
-// console.log('json:', 
-//     JSON.stringify(meetup, function replacer(key, value){
-//         return key, value
-//     })
-// );
+
+function isToday(date) {
+    let now = new Date();
+    return now.getFullYear() == date.getFullYear() && now.getMonth() == date.getMonth() && now.getDate() == date.getDate();
+}
+
+console.log('isToday(date):',isToday( new Date()));
+
+const cycleObj = { cycle: '!!!' };
+cycleObj['cycleObj'] = cycleObj;
+
+const obj10 = { prop1: 123, prop2: 'str', prop3: true, cycleObj };
+
+console.log('json:', 
+    JSON.stringify(obj10, function replacer(key, value){
+        return (key != "" && value == cycleObj) ? undefined : value;
+    })
+);
+
+
+// obj[Symbol.iterator] = () => {
+//     // ?
+// };
+
+// const obj = { prop1: 123, prop2: 'str', prop3: true };
+// const [val1, val2, , val3] = obj;
+// for (val of obj) {
+//     console.log(val);
+// }
