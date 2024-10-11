@@ -8,6 +8,20 @@
 <body>
     <h1 id="title"></h1>
     <input type="text" id="elem">
+
+
+    <dialog aria-label="Заполните форму" id="dialog" style="max-width: 400px; font-size: 24px;">
+        <button id="closeDialog">Close</button>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda, neque, asperiores nesciunt eius doloremque totam deserunt a dolores expedita, aliquid modi. Aut et quibusdam repellendus mollitia placeat assumenda, beatae illo.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda, neque, asperiores nesciunt eius doloremque totam deserunt a dolores expedita, aliquid modi. Aut et quibusdam repellendus mollitia placeat assumenda, beatae illo.
+    </dialog>
+    <button type="button" id="showModalDialog">Открыть как модалку</button>
+
+    <script>
+        showModalDialog.addEventListener('click', () => {dialog.showModal()})
+        closeDialog.addEventListener('click', () => {dialog.close()})
+    
+    </script>
     <script src="./6/chapter.js"></script>
     <!-- <script src="./tasks-array.js"></script> -->
     <!-- <script src="./tasks.js"></script> -->

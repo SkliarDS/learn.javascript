@@ -1,191 +1,188 @@
+function printNumbers(from, to){
+    let num = from - to;
+    let timerId = setInterval(() => {
+        console.log('print:',num--);
+    }, 1000);
+    setTimeout(() => {clearInterval(timerId)}, num * 1000)
+};
+// printNumbers(10, 2)
+function printNumbersSetTime(from, to){
+    let num = from - to;
+    setTimeout(function timer(){
+        console.log('timer:',num--);
+        if(num > 0) setTimeout(timer, 1000) ;
+    }, 1000);
+    
+};
+// printNumbersSetTime(10, 2)
 
-function pow(x, n) {
-    if (n == 1) {
-        return x;
-    } else {
-        return x * pow(x, n - 1);
-    }
-}
-console.log('pow(2, 3):',pow(2, 3));
-
-function sumTo(n) {
-    // let result = n;
-    // for(let i = 0; i < n; i++){
-    //     result += i;
-    // }
-    // return result;
-
-   
-    if(n <= 0){
-        return n;
-    } else {
-        return n + sumTo(n - 1);
-        // 3
-        // 2
-        // 1
-    }
-}
-
-console.log('sumTo(n):',sumTo(4));
-
-function factorial(n){
-    if(n === 1){
-        return 1;
-    } else {
-        return n * factorial(n - 1);
-    }
-}
-console.log('factorial(5):',factorial(5));
-
-function fib(n) { 
-    if(n <= 1){
-        return n;
-    } else {
-        return fib(n - 1) + fib(n - 2);
-    }
-}
-console.log('fib:',fib(7));
-
-let list = {
-    value: 1,
-    next: {
-        value: 2,
-        next: {
-        value: 3,
-            next: {
-                value: 4,
-                next: null
-            }
-        }
+let worker = {
+    someMethod() {
+      return 2;
+    },
+  
+    slow(x) {
+      console.log("Called with " + x);
+      return x * this.someMethod(); // (*)
     }
 };
 
-function printList(list){
-    while(list){
-        console.log('list.value:',list.value);   
-        list = list.next;     
-    }
+function cachingDecorator(func) {
+    let cache = new Map();
+    return function(x) {
+        if (cache.has(x)) {
+            return cache.get(x);
+        }
+        let result = func.call(this, x); // (**)
+        cache.set(x, result);
+        return result;
+    };
 }
-printList(list)
-
-function sumAll( ...args) { // args — имя массива
-    let sum = 0;
-    console.log('arguments:',arguments);
-    for (let arg of args) sum += arg;
   
-    return sum;
+console.log('worker', worker.slow(2) ); 
+
+worker.slow = cachingDecorator(worker.slow); 
+
+console.log('worker2', worker.slow(2) );
+
+function hash() {
+    console.log('[]', [].join.call(arguments) ); // 1,2
 }
-console.log('sumAll(...args):',sumAll(1, 2, 3, 4));
 
-let arr1 = [1, -2, 3, 4];
-let arr2 = [8, 3, -8, 1];
+hash(1, 2, 4, 2);
 
-console.log('Math.max(...arr1, ...arr2):',Math.max(...arr1, ...arr2));
-
-let merged = [0, ...arr1, 2, ...arr2];
-console.log('merged:',merged);
-
-// let name = "John";
-
-// function sayHi() {
-//   console.log("Hi, " + name);
-// }
-
-// name = "Pete";
-// sayHi(); 
-
-let phrase = "Hello";
-
-if (true) {
-  let user = "John";
-
-  function sayHi() {
-    console.log(`${phrase}, ${user}`);
-  }
+function work(a, b) {
+    console.log( a + b ); 
 }
-sayHi();
 
-function sum(a){    
-    return function(b){
-        return a + b;
+function spy(func){
+    function wrapper(...args){
+        wrapper.calls.push(args);
+        return func.apply(this, args);
+    }
+    wrapper.calls = [];
+    return wrapper;
+}
+
+work = spy(work);
+
+work(1, 2);
+work(4, 5); 
+for (let args of work.calls) {
+    console.log( 'call:' + args.join() );
+}
+
+function f(x) {
+    console.log(x);
+}
+
+function delay(func, num){
+    return function (...args){
+        setTimeout(() => {
+            return func.apply(this, args);
+        }, num);
+    };
+
+}
+
+let f1000 = delay(f, 1000);
+let f1500 = delay(f, 3000);
+
+f1000("test1"); 
+f1500("test2");
+
+
+function debounce(func, ms){
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), ms);
     }
 }
-console.log('sum:',sum(2)(4));
-console.log('sum:',sum(5)(-1));
-
-let x = 1;
-
-function func() {
-    console.log(x); // ReferenceError: Cannot access 'x' before initialization
-    // let x = 2;
+function handelInput(e){
+    console.log('input :',e.target.value);
 }
-func();
+let debounceInputHandler = debounce(handelInput, 1000);
 
-let arr = [1, 2, 3, 4, 5, 6, 7];
-function inBetween(a, b){
+document.querySelector('#elem').addEventListener('input', debounce(handelInput, 1000));
+
+
+
+function throttle(func, ms){
+    let timeout;
+    return (arg) => {
+        clearInterval(timeout);
+        timeout = setInterval(() => func.call(this, arg), ms)
+    }
+}
+function handlerMouse(e){
+    console.log('e.target:',e.clientX);
+}
+
+let runCursor = throttle(handlerMouse, 1000);
+// window.addEventListener('mousemove', runCursor)
+// f1200("23"); // показывает 1
+
+let user = {
+    firstName: "Вася",
+    sayHi() {
+      console.log(`Привет, ${this.firstName}!`);
+    }
+};
+
+setTimeout(() => {
+    user.sayHi(); // Привет, Вася!
+}, 1000);
+
+function sayHi2() {
+    console.log('sayHi2', this.name );
     
-    return function(num){
-        
-        return num >= a && num <= b;
-        
+}
+// sayHi.test = 5;
+let bound = sayHi2.bind({name: 'Dima'});
+bound();
+
+let user12 = {
+    firstName: "Вася",
+    sayHi() {
+      console.log(`Привет, ${this.firstName}!`);
     }
-   
-}
-console.log('arr.filter(inBetween():',arr.filter(inBetween(3, 6)));
+};
+let f1 = user12.sayHi;
+setTimeout(f1.bind(user12), 1000);
 
-function inArray(array){
-    
-    return function (num){
-        for(let key of array){
-            if(key == num){
-                return true;
-            }
-        }
+function askPassword(ok, fail) {
+    let password = prompt("Password?", '');
+    if (password == "rockstar") ok();
+    else fail();
+}
+
+let user3 = {
+    name: 'Вася',
+  
+    loginOk() {
+      alert(`${this.name} logged in`);
+    },
+  
+    loginFail() {
+      alert(`${this.name} failed to log in`);
+    },
+  
+};
+// askPassword(user3.loginOk.bind(user3), user3.loginFail.bind(user3));
+let user4 = {
+    name: 'John',
+  
+    login(result) {
+      alert( this.name + (result ? ' logged in' : ' failed to log in') );
     }
-}
-console.log('arr.filter(inArray([1, 2, 10]):',arr.filter(inArray([1, 2, 10])));
-
-let users = [
-    { name: "Иван", age: 20, surname: "Иванов" },
-    { name: "Пётр", age: 18, surname: "Петров" },
-    { name: "Анна", age: 19, surname: "Каренина" }
-];
-
-function byField(fieldName) {
-    return (a, b) => a[fieldName] > b[fieldName] ? 1 : -1;
-}
-console.log('byField(fieldName):',users.sort(byField('age')));
-
-function makeArmy() {
-    let shooters = [];
-
-    for(let i = 0; i < 10; i++){
-        let shooter = function(){
-            console.log('i:',i);
-        }
-        shooters.push(shooter);
-    }
-    return shooters;
-}
-
-let army = makeArmy();
-army[2]();
+};
+// askPassword(user4.login.bind(null, true), user4.login.bind(null, false));
 
 
-function makeCounter(){
-    // let count = 0;
-    function counter(){
-        return ++counter.count;
-    }
-    counter.count = 0;
-    counter.set = value => counter.count = value;
-    counter.dec = () => --counter.count;
-    return counter;
-}
 
-let counter = makeCounter();
 
-console.log('counter:',counter());
-console.log('counter:',counter.set(3));
-console.log('counter:',counter.dec());
+
+
+
 
