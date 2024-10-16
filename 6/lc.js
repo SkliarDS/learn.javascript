@@ -112,13 +112,37 @@ console.log('getAdultUsers', getAdultUsers(usersObject));
 // bot.sendMessage('Как дела?');  //  Бот ответит одной из
 
 function ChatBot(){
-    this.sendMessage = function(message){
+    this.title = document.querySelector('#title');
+    this.input = document.querySelector('#input');
+    this.btn = document.querySelector('#btn');
 
+    let answerTexts = [
+        'Рад тебя видеть!',
+        'Что хочешь!',
+        'Не задавай глупых вопросов!',
+        'Кури бамбук!',
+        'Пошел от сюда хилиган!',
+    ]
+    this.handle = function(e){
+        this.title.textContent = e.target.value;
     }
-    this.addResponse = function(){
-
+    this.getTextInput = function(){
+        this.input.addEventListener('input', (e) => this.handle(e))
+    }
+    this.sendAnswer = function(){
+        this.btn.addEventListener('click', () => {setTimeout(()=>this.addResponse(), 1000)})
+    }
+    this.addResponse = function(answer){
+        let random = Math.round(Math.random() * (answerTexts.length - 1));
+        this.randomAnswer = answerTexts[random];
+        this.title.textContent = this.randomAnswer;
     }
 }
+let bot = new ChatBot();
+
+bot.getTextInput();
+bot.sendAnswer();
+
 
 // Дан многомерный объект произвольного уровня вложенности:
 
@@ -132,3 +156,96 @@ function ChatBot(){
 
 // Сделайте функцию, которая будет возвращать элементы объекта, параметром получая строку с ключами объекта, разделенными точками:
 // func10('a.b.c'); // вернет '+++'
+
+function sayHi(phrase, who) {
+    console.log( phrase + ', ' + who );
+  }
+  
+setTimeout(sayHi("Привет", "ДжонYuk"), 1000); // Привет, Джон
+
+// setTimeout(function run() {
+//     func(i);
+//     setTimeout(run, 100);
+// }, 100);
+
+// setTimeout(function run() {
+//     setTimeout(run, 100);
+//     func(i);
+// }, 100);
+
+// performance.now()
+
+
+let x = 40;
+function foo() {
+    const x = 10;  
+    return {
+        x: 20,
+        bar: () => {
+            console.log(this.x); // indefined
+        },
+        baz: function () {
+            console.log(this.x); //20
+        },
+    };    
+}
+
+const obj1 = foo();
+obj1.bar(); 
+obj1.baz(); 
+
+const obj2 = foo.call({ x: 30 });
+
+let y = obj2.bar;
+let z = obj2.baz;
+y(); // 30
+z(); // indefined
+
+obj2.bar(); // 30
+obj2.baz(); // 20
+
+
+
+// реализовать свой apply
+// function myApply(context, arg, func) {
+    
+// }
+
+// function aboba(){
+//     console.log(this.name)
+// }
+
+// aboba.myAplly()
+// myAplly(..., aboba)
+
+
+// function sayHi() {
+//     let name = 'Dima'
+//     console.log( this.name );
+//     console.log('num', this.num );
+// }
+// sayHi.test = 5;
+// let bound = sayHi.bind({
+//     name: "Вася",
+//     num: 5
+// });
+// sayHi()
+// bound()
+
+const fetchPosts = async () => {
+    const responsePosts = await fetch('https://jsonplaceholder.typicode.com/posts');
+    const responseUsers = await fetch('https://jsonplaceholder.typicode.com/users');
+    const posts = await responsePosts.json();
+    const users = await responseUsers.json();
+    const newPosts = posts.map(post => {
+        const user = users.find(user => user.id == post.userId);
+        const countPost = posts.filter(item => item.userId == post.userId).length;
+        return {
+            ...post,
+            userName: user.name,
+            userCount: countPost
+        }
+    })
+    const filteredPosts = newPosts.sort((a, b) => a.title.localeCompare(b.title)).filter(post => post.title.length >= 40);
+}
+fetchPosts();
