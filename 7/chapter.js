@@ -1,4 +1,4 @@
-// 'use strict'
+'use strict'
 let user = {
     name: "John",
     surname: "Smith",
@@ -12,10 +12,10 @@ let user = {
 };
 
 let descriptor = Object.getOwnPropertyDescriptor(user, 'name');
-
-
 console.log('user:',user.fullName = 'Dima');
 console.log( JSON.stringify(descriptor, null, 2) );
+
+
 let a = {}
 Object.defineProperty(a, 'name', {
 	value: "Dmitriy",
@@ -44,3 +44,29 @@ Object.defineProperty(a, 'method', {
 })
 a.method = 'IVAN'
 console.log('a.method:',a.method);
+console.log('a:',a);
+
+// let person = {};
+let person =  Object.defineProperties({}, {
+	name: {value: 'Max', writable: true},
+	yourCar: {value: 'Tesla',  writable: true, configurable: false},
+})
+Object.defineProperty(person, 'method', {
+	get(){
+		console.log('person.method:',this.name);
+	},
+	set(value){
+		console.log('person.metod.set:',this.yourCar = value);
+	}
+})
+person.method;
+person.method = 'Mersedes';
+
+let clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(person));
+Object.defineProperty(clone, 'surName', {
+	value: 'Ivanov'
+})
+console.log('person:',person);
+console.log("clone:", clone)
+
+console.log('compare:',clone == person);
