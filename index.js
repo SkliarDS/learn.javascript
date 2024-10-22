@@ -42,7 +42,6 @@ console.log('counSymbInStr', counSymbInStr); // 1 2
 
 // console.log(' "123":', Number('123'));
 // console.log(' "123.4":', Number('123.4'));
-// console.log(' "123,4":', Number('123,4') );
 // console.log(' "":', Number(''));
 // console.log(' null:', Number(null));
 // console.log(' undefined:', Number(undefined));
@@ -68,12 +67,12 @@ console.log('counSymbInStr', counSymbInStr); // 1 2
 // console.log(' []:', Boolean([]));
 // console.log(' [1, 2]:', Boolean([1, 2]) );
 
-obj[Symbol.iterator] = () => {
+// obj[Symbol.iterator] = () => {
     
-};
+// };
 
-const obj = { prop1: 123, prop2: 'str', prop3: true };
-const [val1, val2, , val3] = obj;
-for (val of obj) {
-    console.log(val);
-}
+// const obj = { prop1: 123, prop2: 'str', prop3: true };
+// const [val1, val2, , val3] = obj;
+// for (val of obj) {
+//     console.log(val);
+// }

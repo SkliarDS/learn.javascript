@@ -1,4 +1,4 @@
-'use strict'
+// 'use strict'
 let user = {
     name: "John",
     surname: "Smith",
@@ -70,3 +70,54 @@ console.log('person:',person);
 console.log("clone:", clone)
 
 console.log('compare:',clone == person);
+
+function isIsogram(str){
+	
+	return new Set(str.toUpperCase()).size == str.length;
+}
+
+console.log('isIsogram:',isIsogram('Dermatoglyphics'));
+console.log('isIsogram:',isIsogram('aba'));
+console.log('isIsogram:',isIsogram('isogram'));
+console.log('isIsogram:',isIsogram('moOse'));
+
+
+function getCount(str) {
+	let count = 0;
+	let vowels = 'aeiou';
+	for (let i = 0; i < str.length; i++){
+		if(vowels.indexOf(str[i].toLowerCase()) !== -1){
+			count++;
+		}
+	}
+	return count;
+}
+
+console.log('getCount(str):',getCount('abracadabra'));
+
+function dontGiveMeFive(start, end){
+	let count = 1;
+	for (let i = start; i <= end; i++) {
+        if (!i.toString().includes('5')) {
+            count++; 
+        }
+    }
+    return count;
+}
+
+console.log('dontGiveMeFive(start, end):',dontGiveMeFive(4, 17));
+console.log('dontGiveMeFive(start, end):',dontGiveMeFive(1, 9));
+console.log('dontGiveMeFive(start, end):',dontGiveMeFive(1, 3));
+
+let obj = {
+	a: 2,
+	get f(){
+		
+	},
+	set f(value){
+		console.log('a:',this.a);
+		this.a = value;
+		console.log('set.f:',this.a);
+	},
+}
+obj.f = 4
