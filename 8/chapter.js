@@ -90,6 +90,7 @@ let pig = Object.create(rabbit, {
     }
 });
 console.log('pig:', pig);
+console.log('rabbtitOfpig:', rabbit);
 console.log('Object.getPrototypeOf:', Object.getPrototypeOf(pig));
 
 
@@ -217,3 +218,6 @@ console.log(Object.getPrototypeOf(num));  // Вывод: [Number: 0] (Number.pro
 console.log(Object.getPrototypeOf(str));  // Вывод: {} (String.prototype)
 console.log(Object.getPrototypeOf(func)); // Вывод: f() (Function.prototype)
 console.log(Object.getPrototypeOf(arr2)); // Вывод: [] (Array.prototype)
+
+
+  
