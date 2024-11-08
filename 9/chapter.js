@@ -48,25 +48,6 @@ let rabbit = new Rabbit("Белый кролик"); // Error: this is not define
 console.log(rabbit.name);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class Clock {
     constructor ({ template }){
         this.template = template
@@ -139,6 +120,7 @@ class Article2 extends Article{
 
 }
 let ar = new Article2('new article', new Date())
+let article = new Article('old article', new Date())
 console.log("ar:", ar.title, ar.date)
 
 let a = Article2.createTodays();
@@ -153,3 +135,87 @@ class Rabbit1 extends Object {
   
 let rabbit1 = new Rabbit1("Кроль");  
 console.log( rabbit1.hasOwnProperty('name') ); // Ошибка
+
+console.log('Article:',article);
+console.log('Article2:',ar);
+console.log('Article:',article.__proto__.__proto__.__proto__);
+console.log('Article2:',ar.__proto__.__proto__.__proto__.__proto__);
+
+class CoffeeMachine {
+
+    #waterAmount = 0;
+  
+    get waterAmount() {
+        return this.#waterAmount;
+    }
+  
+    set waterAmount(value) {
+        if (value < 0) throw new Error("Отрицательный уровень воды");
+        this.#waterAmount = value;
+    }
+}
+  
+  let machine = new CoffeeMachine();
+  
+  machine.waterAmount = 100;
+//   console.log(machine.#waterAmount);
+
+class MegaCoffeeMachine extends CoffeeMachine {
+    method() {
+        console.log( this.waterAmount ); 
+    }
+}
+
+let mega = new MegaCoffeeMachine();
+
+mega.method()
+
+
+class PowerArray extends Array {
+    isEmpty() {
+        return this.length === 0;
+    }
+    // static get [Symbol.species]() {
+    //     return Array;
+    // }
+}
+let array = []
+let arr = new PowerArray(1, 2, 5, 10, 50);
+console.log('arra:',arr);
+
+console.log('proto:', Object.prototype.toString.call(PowerArray));
+
+class Test {
+    test = 123;
+    static arrow () {
+        console.log('this:',this.test);
+    };
+}
+
+class Test2 extends Test {
+
+}
+new Test2().test
+console.log('new Test2():',new Test2().test);
+
+class CoffeeMachine2 {
+    #waterLimit = 200;
+  
+    constructor(power) {
+      this._power = power;
+    }
+  
+    get power() {
+      return this._power;
+    }
+    // set power(value){
+    //     return this._power = value;
+    // }
+  
+}
+
+
+let coffeeMachine = new CoffeeMachine2(100);
+
+coffeeMachine.power = 25;
+console.log(`Мощность: ${coffeeMachine.power}W`); 
