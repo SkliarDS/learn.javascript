@@ -20,9 +20,9 @@ input.addEventListener('input' , (e) => {
     proxyObj.elValue = e.target.value;
 
 })
-console.log('proxyObj:',proxyObj);
 
-// nodeEl.innerHTML = obj.elValue;
+console.log('proxyObj:',proxyObj);
+console.log('obj:',obj.elValue);
 
 let dictionary = {
     'Hello': 'Hola',
