@@ -68,12 +68,11 @@ fetch('https://jsonplaceholder.typicode.com/users')
         }
     })
     .then(res => res)
-let data;
+
 fetch('https://jsonplaceholder.typicode.com/users')
     .then(response => response.json())
     .then(json => {
-        data = json
-        console.log('data:',data);
+        console.log('json:',json);
     })
     .catch(error => console.log('error:',error))
     
@@ -91,11 +90,56 @@ fetch('https://jsonplaceholder.typicode.co/users')
 
 const dataFetch = async () => {
     const response = await fetch('https://jsonplaceholder.typicode.com/users');
-    const data = await response.json();
-    console.log('data:',data);
-    return data;
+    return response.json();
 };
+const dataBase = await dataFetch();
+console.log("dataBase:", dataBase);
+
 dataFetch().then(data => {
     document.querySelector('#title').innerHTML = data[0].name;
 })
 
+Promise.all([
+    new Promise((resolve, reject) => setTimeout(() => resolve(1), 1000)),
+    new Promise((resolve, reject) => setTimeout(() => reject(new Error("Ошибка!")), 2000)),
+    new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000))
+])
+.then(val => console.log('val:',val))
+.catch(console.log);
+
+// function loadJson(url) {
+//     return fetch(url).then(response => {
+//             if (response.status == 200) {
+//                 return response.json();
+//             } else {
+//                 throw new Error(response.status);
+//             }
+//         })
+// }
+
+// loadJson('no-such-user.json').catch(alert);
+
+async function loadJson(url) {
+    const response = await fetch(url);
+    if (response.status == 200) {
+        return response.json();
+    } else {
+        console.log('response.status', response.status)
+    }
+}
+
+loadJson('no-such-user.json')
+
+async function wait() {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  
+    return 10;
+}
+  
+async function f() {
+    const result = await wait();
+    return console.log('result',result);
+    
+}
+  
+f();
