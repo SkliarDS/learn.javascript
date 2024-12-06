@@ -14,10 +14,47 @@
             text-decoration: none;
             border-bottom: 1px solid #000;
         }
+        input {
+            outline: none;
+        }
+        input.is-not-valid {
+            border-color: red;
+        }
+        input.is-valid {
+            border-color: green;
+        }
+        .checkbox-wrap {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox {
+            appearance: none;
+            display: inline-grid;
+            place-content: center;
+            width: 20px;
+            height: 20px;
+            border: 1px solid;
+            border-radius: 5px;
+            transition: all .3s ease-in-out;
+        }
+        .checkbox:checked {
+            border-color: aqua;
+            background-color: aqua;
+        }
+        .checkbox:checked::after {
+            content: '✓';
+        }
     </style>
 </head>
 <body>
-    <input type="text" id="input">
+    <form class="form form-validation">
+        <input type="text">
+        <input type="tel">
+        <label class="checkbox-wrap">
+            <input type="checkbox" class="checkbox">
+            <span>tet</span>
+        </label>
+    </form>
     <button id="btn">Задать вопрос</button>
     <h4 id="title"></h4>
 
@@ -36,8 +73,9 @@
     
     </script>
     <!-- <script src="./kettle.js"></script> -->
-    <!-- <script type="module" src="./11/chapter.js"></script> -->
-    <script src="./promiseTask.js"></script>
+    <script type="module" src="./11/chapter.js"></script>
+    <!-- <script src="./promiseTask.js"></script> -->
     <!-- <script src="./proxy.js"></script> -->
+    <!-- <script src="./validation.js"></script> -->
 </body>
 </html>

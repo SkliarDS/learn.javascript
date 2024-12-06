@@ -143,3 +143,36 @@ async function f() {
 }
   
 f();
+
+Promise.race([
+    new Promise(resolve => setTimeout(() => resolve(1111), 3000)), // 1
+    new Promise((resolve, reject )=> setTimeout(() => reject(new Error(2222)), 2000)), // 2
+    new Promise(resolve => setTimeout(() => resolve(3333), 1000))  // 3
+]).then(console.log);
+
+
+const loadScript = (src, callback) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => callback(null, script);
+    script.onerror = () => callback(new Error('ERROR'))
+    document.body.append(script)
+};
+
+// loadScript('./promiseTask.js', (err, script) => {
+//     console.log('script:',script);
+//     console.log('err:',err);
+// })
+
+let loadScriptPromise = function(src) {
+    return new Promise((res, rej) => {
+        loadScript(src, (err, script) => {
+            if(err){
+                rej(err);
+            } else {
+                res(script)
+            }
+        })
+    })
+}
+
