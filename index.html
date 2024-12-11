@@ -44,20 +44,31 @@
         .checkbox:checked::after {
             content: '✓';
         }
+        .progress {
+            width: 100%;
+            max-width: 300px;
+            background-color: blue;
+            border: none;
+        }
     </style>
 </head>
 <body>
     <form class="form form-validation">
         <input type="text">
         <input type="tel">
-        <label class="checkbox-wrap">
-            <input type="checkbox" class="checkbox">
-            <span>tet</span>
-        </label>
+        
     </form>
     <button id="btn">Задать вопрос</button>
-    <h4 id="title"></h4>
-
+    
+    <div class="kettle">
+        <h4 class="kettle__title">Кол-во воды: <span>0</span> мл.</h4>
+        <input type="number" min="0" max="1000" step="100" placeholder="мл." id="">
+        <label class="checkbox-wrap">
+            <input type="checkbox" class="checkbox">
+            <span>вкл.</span>
+        </label>
+        <progress value="0"></progress>        
+    </div>
 
     <dialog aria-label="Заполните форму" id="dialog" style="max-width: 400px; font-size: 24px;">
         <button id="closeDialog">Close</button>
@@ -72,8 +83,8 @@
         closeDialog.addEventListener('click', () => {dialog.close()})
     
     </script>
-    <!-- <script src="./kettle.js"></script> -->
-    <script type="module" src="./12/chapter.js"></script>
+    <script src="./kettle.js"></script>
+    <!-- <script type="module" src="./12/chapter.js"></script> -->
     <!-- <script src="./promiseTask.js"></script> -->
     <!-- <script src="./proxy.js"></script> -->
     <!-- <script src="./validation.js"></script> -->
