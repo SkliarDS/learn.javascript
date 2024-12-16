@@ -60,6 +60,7 @@ class Kettle {
 }
 
 const k = new Kettle();
+console.log("k:", k)
 
 document.querySelector('[type="checkbox"]').addEventListener('change', (e) => {
     if(e.target.checked){
@@ -72,3 +73,59 @@ document.querySelector('[type="checkbox"]').addEventListener('change', (e) => {
 document.querySelector('[type="number"]').addEventListener('input', (e) => {
     k.addWater();
 })
+
+let array = ["федя", "петя", "дима"];
+function f(arr) {
+    return arr.map(name => name[0].toUpperCase() + name.slice(1));
+}
+console.log(f(array));
+
+
+function* pseudoRandom(previous){
+    yield Math.random(previous * 16807 % 214783647);
+}
+let generator = pseudoRandom(1);
+
+console.log(' generator 1:', generator.next().value);
+
+async function* generateSequence(start, end) {
+
+    for (let i = start; i <= end; i++) {
+  
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    
+        yield i;
+    }
+  
+}
+
+(async () => {
+  
+    let generator = generateSequence(1, 5);
+    for await (let value of generator) {
+        console.log('ffff',value); // 1, потом 2, потом 3, потом 4, потом 5
+    }
+  
+})();
+
+
+function* asyncGenerator() {
+    const result1 = yield new Promise(resolve => setTimeout(() => resolve("Result 1"), 1000));
+    console.log(result1);
+    const result2 = yield new Promise(resolve => setTimeout(() => resolve("Result 2"), 1000));
+    console.log(result2);
+}
+
+function run(generator) {
+    const iterator = generator();
+    
+    function handle(result) {
+        if (result.done) return result.value;
+        return result.value.then(res => handle(iterator.next(res)));
+    }
+  
+    handle(iterator.next());
+}
+
+// Используем генератор
+run(asyncGenerator);
